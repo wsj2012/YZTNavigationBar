@@ -8,13 +8,13 @@
 
 import UIKit
 
-private let IMAGE_HEIGHT:CGFloat = 260
-private let NAVBAR_COLORCHANGE_POINT:CGFloat = IMAGE_HEIGHT - CGFloat(kNavBarBottom * 2)
+private let HEADER_HEIGHT:CGFloat = 260
+private let NAVBAR_COLORCHANGE_POINT:CGFloat = HEADER_HEIGHT - CGFloat(kNavBarBottom * 2)
 
 class YZTPersonalCenterViewController: BaseViewController {
     
     lazy var headerView: UIView = {
-        var header = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: IMAGE_HEIGHT))
+        var header = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: HEADER_HEIGHT))
         header.backgroundColor = UIColor.orange
         return header
     }()
