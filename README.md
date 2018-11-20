@@ -1,4 +1,6 @@
 # YZTNavigationBar
+
+Build Status CocoaPods Version Carthage Compatible
 定制UINavigationBar样式，可全局统一设置默认样式，在各页面灵活定制自己的样式。
 
 ## Setup Instructions
@@ -40,4 +42,54 @@ func setNavbarAppearance() {
 
 * 2、Custom Style
 
-![baidu](https://github.com/wsj2012/Flop/blob/master/drop.gif) 
+![baidu](https://github.com/wsj2012/YZTNavigationBar/blob/master/Custom.gif?raw=true) 
+
+```
+
+func setNavbarAppearanc() {
+        // 设置导航栏颜色
+        navBar.barBackgroundColor = UIColor(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1.0)
+        // 设置初始导航栏透明度
+        navBar.yzt_setBackgroundAlpha(alpha: 0)
+        // 设置标题文字颜色
+        navBar.titleLabelColor = UIColor.white
+        navBar.yzt_setRightButton(title: "设置", titleColor: .white)
+        statusBarStyle = .lightContent
+        navBar.onClickRightButton = {
+ 
+        }
+    }
+    
+// MARK: - ScrollViewDidScroll
+extension YZTPersonalCenterViewController
+{
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        let offsetY = scrollView.contentOffset.y
+        if (offsetY > NAVBAR_COLORCHANGE_POINT)
+        {
+            let alpha = (offsetY - NAVBAR_COLORCHANGE_POINT) / CGFloat(kNavBarBottom)
+            navBar.yzt_setBackgroundAlpha(alpha: alpha)
+            navBar.yzt_setTintColor(color: UIColor.black.withAlphaComponent(alpha))
+            navBar.titleLabelColor = UIColor.black.withAlphaComponent(alpha)
+            statusBarStyle = .default
+        }
+        else
+        {
+            navBar.yzt_setBackgroundAlpha(alpha: 0)
+            navBar.yzt_setTintColor(color: .white)
+            navBar.titleLabelColor = .white
+            statusBarStyle = .lightContent
+        }
+    }
+}
+    
+```
+
+If you have questions, you can see demo.
+
+
+
+## Compatibility
+ 
+ * Version 1.0.1 requires Swift 4.2 and Xcode 10.
