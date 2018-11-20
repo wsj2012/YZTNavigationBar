@@ -13,7 +13,7 @@ fileprivate let YZTDefaultTitleColor = UIColor.black
 fileprivate let YZTDefaultBackgroundColor = UIColor.white
 fileprivate let YZTScreenWidth = UIScreen.main.bounds.size.width
 
-class YZTCustomNavigationBar: UIView {
+open class YZTCustomNavigationBar: UIView {
 
     open var onClickLeftButton:(()->())?
     open var onClickRightButton:(()->())?
@@ -99,7 +99,7 @@ class YZTCustomNavigationBar: UIView {
     }
     
     // init
-    class func CustomNavigationBar() -> YZTCustomNavigationBar {
+    open class func CustomNavigationBar() -> YZTCustomNavigationBar {
         let frame = CGRect(x: 0, y: 0, width: YZTScreenWidth, height: CGFloat(navBarBottom))
         return YZTCustomNavigationBar(frame: frame)
     }
@@ -107,7 +107,7 @@ class YZTCustomNavigationBar: UIView {
         super.init(frame: frame)
         setupView()
     }
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
     }

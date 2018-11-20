@@ -838,7 +838,7 @@ extension DispatchQueue {
     }
 }
 
-class YZTNavigationBar
+open class YZTNavigationBar
 {
     fileprivate struct AssociatedKeys
     {   // default is system attributes
