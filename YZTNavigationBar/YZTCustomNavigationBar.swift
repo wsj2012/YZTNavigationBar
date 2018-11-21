@@ -127,7 +127,7 @@ open class YZTCustomNavigationBar: UIView {
     func updateFrame()
     {
         let top:CGFloat = YZTNavigationBar.isIphoneX() ? 44 : 20
-        let margin:CGFloat = 20
+        let margin:CGFloat = 16
         let buttonHeight:CGFloat = 44
         let buttonWidth:CGFloat = 44
         let titleLabelHeight:CGFloat = 44
@@ -139,6 +139,8 @@ open class YZTCustomNavigationBar: UIView {
         rightButton.frame = CGRect(x: YZTScreenWidth-buttonWidth-margin, y: top, width: buttonWidth, height: buttonHeight)
         titleLabel.frame = CGRect(x: (YZTScreenWidth-titleLabelWidth)/2.0, y: top, width: titleLabelWidth, height: titleLabelHeight)
         bottomLine.frame = CGRect(x: 0, y: bounds.height-0.5, width: YZTScreenWidth, height: 0.5)
+        leftButton.contentHorizontalAlignment = .left
+        rightButton.contentHorizontalAlignment = .right
     }
 
 }
