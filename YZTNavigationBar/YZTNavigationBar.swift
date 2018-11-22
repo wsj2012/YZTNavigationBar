@@ -211,7 +211,7 @@ extension UINavigationBar:YZTAwakeProtocol
     //==========================================================================
     // MARK: swizzling pop
     //==========================================================================
-    @objc open func yzt_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?)
+    @objc public func yzt_setTitleTextAttributes(_ newTitleTextAttributes:[String : Any]?)
     {
         guard var attributes = newTitleTextAttributes else {
             return
@@ -351,7 +351,7 @@ extension UINavigationController: YZTFatherAwakeProtocol
     }
     
     // swizzling system method: popToViewController
-    @objc open func yzt_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
+    @objc public func yzt_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]?
     {
         setNeedsNavigationBarUpdate(titleColor: viewController.navBarTitleColor)
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
@@ -371,7 +371,7 @@ extension UINavigationController: YZTFatherAwakeProtocol
     }
     
     // swizzling system method: popToRootViewControllerAnimated
-    @objc open func yzt_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
+    @objc public func yzt_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]?
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(popNeedDisplay))
         displayLink?.add(to: .main, forMode: .common)
@@ -418,7 +418,7 @@ extension UINavigationController: YZTFatherAwakeProtocol
     }
     
     // swizzling system method: pushViewController
-    @objc open func yzt_pushViewController(_ viewController: UIViewController, animated: Bool)
+    @objc public func yzt_pushViewController(_ viewController: UIViewController, animated: Bool)
     {
         var displayLink:CADisplayLink? = CADisplayLink(target: self, selector: #selector(pushNeedDisplay))
         displayLink?.add(to: .main, forMode: .common)
@@ -509,7 +509,7 @@ extension UINavigationController: UINavigationBarDelegate
     }
     
     // swizzling system method: _updateInteractiveTransition
-    @objc open func yzt_updateInteractiveTransition(_ percentComplete: CGFloat)
+    @objc public func yzt_updateInteractiveTransition(_ percentComplete: CGFloat)
     {
         guard let topViewController = topViewController,
             let coordinator       = topViewController.transitionCoordinator else {
@@ -573,7 +573,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // you can set navigationBar backgroundImage
-    open var navBarBackgroundImage: UIImage?
+    public var navBarBackgroundImage: UIImage?
     {
         get {
             guard let bgImage = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundImage) as? UIImage else {
@@ -593,7 +593,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // navigationBar barTintColor
-    open var navBarBarTintColor: UIColor {
+    public var navBarBarTintColor: UIColor {
         get {
             guard let barTintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarBarTintColor) as? UIColor else {
                 return YZTNavigationBar.defaultNavBarBarTintColor
@@ -616,7 +616,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // navigationBar _UIBarBackground alpha
-    open var navBarBackgroundAlpha:CGFloat {
+    public var navBarBackgroundAlpha:CGFloat {
         get {
             guard let barBackgroundAlpha = objc_getAssociatedObject(self, &AssociatedKeys.navBarBackgroundAlpha) as? CGFloat else {
                 return 1.0
@@ -649,7 +649,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // navigationBar tintColor
-    open var navBarTintColor: UIColor {
+    public var navBarTintColor: UIColor {
         get {
             guard let tintColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTintColor) as? UIColor else {
                 return YZTNavigationBar.defaultNavBarTintColor
@@ -673,7 +673,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // navigationBar titleColor
-    open var navBarTitleColor: UIColor {
+    public var navBarTitleColor: UIColor {
         get {
             guard let titleColor = objc_getAssociatedObject(self, &AssociatedKeys.navBarTitleColor) as? UIColor else {
                 return YZTNavigationBar.defaultNavBarTitleColor
@@ -697,7 +697,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // statusBarStyle
-    open var statusBarStyle: UIStatusBarStyle {
+    public var statusBarStyle: UIStatusBarStyle {
         get {
             guard let style = objc_getAssociatedObject(self, &AssociatedKeys.statusBarStyle) as? UIStatusBarStyle else {
                 return YZTNavigationBar.defaultStatusBarStyle
@@ -711,7 +711,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // if you want shadowImage hidden,you can via hideShadowImage = true
-    open var navBarShadowImageHidden:Bool {
+    public var navBarShadowImageHidden:Bool {
         get {
             guard let isHidden = objc_getAssociatedObject(self, &AssociatedKeys.navBarShadowImageHidden) as? Bool else {
                 return YZTNavigationBar.defaultShadowImageHidden
@@ -725,7 +725,7 @@ extension UIViewController: YZTAwakeProtocol
     }
     
     // custom navigationBar
-    open var customNavBar: UIView {
+    public var customNavBar: UIView {
         get {
             guard let navBar = objc_getAssociatedObject(self, &AssociatedKeys.customNavBar) as? UINavigationBar else {
                 return UIView()
@@ -760,7 +760,7 @@ extension UIViewController: YZTAwakeProtocol
         }
     }
     
-    @objc open func yzt_viewWillAppear(_ animated: Bool)
+    @objc public func yzt_viewWillAppear(_ animated: Bool)
     {
         if canUpdateNavigationBar() == true {
             pushToNextVCFinished = false
@@ -770,7 +770,7 @@ extension UIViewController: YZTAwakeProtocol
         yzt_viewWillAppear(animated)
     }
     
-    @objc open func yzt_viewWillDisappear(_ animated: Bool)
+    @objc public func yzt_viewWillDisappear(_ animated: Bool)
     {
         if canUpdateNavigationBar() == true {
             pushToNextVCFinished = true
@@ -778,7 +778,7 @@ extension UIViewController: YZTAwakeProtocol
         yzt_viewWillDisappear(animated)
     }
     
-    @objc open func yzt_viewDidAppear(_ animated: Bool)
+    @objc public func yzt_viewDidAppear(_ animated: Bool)
     {
         
         if self.navigationController?.viewControllers.first != self {
@@ -822,7 +822,8 @@ extension DispatchQueue {
     private static var onceTracker = [String]()
     
     //Executes a block of code, associated with a unique token, only once.  The code is thread safe and will only execute the code once even in the presence of multithreaded calls.
-    public class func once(token: String, block: () -> Void)
+    // 跟ytk-swift库方法有冲突，故不使用public
+    class func once(token: String, block: () -> Void)
     {   // 保证被 objc_sync_enter 和 objc_sync_exit 包裹的代码可以有序同步地执行
         objc_sync_enter(self)
         defer { // 作用域结束后执行defer中的代码
@@ -838,7 +839,7 @@ extension DispatchQueue {
     }
 }
 
-open class YZTNavigationBar
+public class YZTNavigationBar
 {
     fileprivate struct AssociatedKeys
     {   // default is system attributes
@@ -963,15 +964,15 @@ open class YZTNavigationBar
 
 extension YZTNavigationBar
 {
-    class open func isIphoneX() -> Bool {
+    public static func isIphoneX() -> Bool {
         if #available(iOS 11.0, *) {
             // 利用safeAreaInsets.bottom > 0.0来判断是否是iPhone X以上设备。
-            let window:UIWindow? = (UIApplication.shared.delegate?.window)!
-            guard let w = window else {
-                return false
-            }
-            if w.safeAreaInsets.bottom > 0.0 {
-                return true
+            if let delegate = UIApplication.shared.delegate, let w = delegate.window, let b = w?.safeAreaInsets.bottom {
+                if b > 0.0 {
+                    return true
+                }else {
+                    return false
+                }
             }else {
                 return false
             }
@@ -980,19 +981,19 @@ extension YZTNavigationBar
         }
     }
     
-    class open func navBarBottom() -> Int {
+    public static func navBarBottom() -> Int {
         return self.isIphoneX() ? 88 : 64;
     }
     
-    class open func tabBarHeight() -> Int {
+    public static func tabBarHeight() -> Int {
         return self.isIphoneX() ? 83 : 49;
     }
     
-    class open func screenWidth() -> Int {
+    public static func screenWidth() -> Int {
         return Int(UIScreen.main.bounds.size.width)
     }
     
-    class open func screenHeight() -> Int {
+    public static func screenHeight() -> Int {
         return Int(UIScreen.main.bounds.size.height)
     }
 }

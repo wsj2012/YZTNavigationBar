@@ -15,32 +15,32 @@ fileprivate let YZTScreenWidth = UIScreen.main.bounds.size.width
 
 open class YZTCustomNavigationBar: UIView {
 
-    open var onClickLeftButton:(()->())?
-    open var onClickRightButton:(()->())?
-    open var title:String? {
+    public var onClickLeftButton:(()->())?
+    public var onClickRightButton:(()->())?
+    public var title:String? {
         willSet {
             titleLabel.isHidden = false
             titleLabel.text = newValue
         }
     }
-    open var titleLabelColor:UIColor? {
+    public var titleLabelColor:UIColor? {
         willSet {
             titleLabel.textColor = newValue
         }
     }
-    open var titleLabelFont:UIFont? {
+    public var titleLabelFont:UIFont? {
         willSet {
             titleLabel.font = newValue
         }
     }
-    open var barBackgroundColor:UIColor? {
+    public var barBackgroundColor:UIColor? {
         willSet {
             backgroundImageView.isHidden = true
             backgroundView.isHidden = false
             backgroundView.backgroundColor = newValue
         }
     }
-    open var barBackgroundImage:UIImage? {
+    public var barBackgroundImage:UIImage? {
         willSet {
             backgroundView.isHidden = true
             backgroundImageView.isHidden = false
@@ -99,7 +99,7 @@ open class YZTCustomNavigationBar: UIView {
     }
     
     // init
-    open class func CustomNavigationBar() -> YZTCustomNavigationBar {
+    public static func CustomNavigationBar() -> YZTCustomNavigationBar {
         let frame = CGRect(x: 0, y: 0, width: YZTScreenWidth, height: CGFloat(navBarBottom))
         return YZTCustomNavigationBar(frame: frame)
     }
@@ -112,7 +112,7 @@ open class YZTCustomNavigationBar: UIView {
         setupView()
     }
     
-    func setupView()
+    private func setupView()
     {
         addSubview(backgroundView)
         addSubview(backgroundImageView)
@@ -124,7 +124,7 @@ open class YZTCustomNavigationBar: UIView {
         backgroundColor = UIColor.clear
         backgroundView.backgroundColor = YZTDefaultBackgroundColor
     }
-    func updateFrame()
+    private func updateFrame()
     {
         let top:CGFloat = YZTNavigationBar.isIphoneX() ? 44 : 20
         let margin:CGFloat = 16
@@ -162,23 +162,23 @@ extension YZTCustomNavigationBar
     }
     
     // 左右按钮共有方法
-    open func yzt_setLeftButton(normal:UIImage, highlighted:UIImage) {
+    public func yzt_setLeftButton(normal:UIImage, highlighted:UIImage) {
         yzt_setLeftButton(normal: normal, highlighted: highlighted, title: nil, titleColor: nil)
     }
-    open func yzt_setLeftButton(image:UIImage) {
+    public func yzt_setLeftButton(image:UIImage) {
         yzt_setLeftButton(normal: image, highlighted: image, title: nil, titleColor: nil)
     }
-    open func yzt_setLeftButton(title:String, titleColor:UIColor) {
+    public func yzt_setLeftButton(title:String, titleColor:UIColor) {
         yzt_setLeftButton(normal: nil, highlighted: nil, title: title, titleColor: titleColor)
     }
     
-    open func yzt_setRightButton(normal:UIImage, highlighted:UIImage) {
+    public func yzt_setRightButton(normal:UIImage, highlighted:UIImage) {
         yzt_setRightButton(normal: normal, highlighted: highlighted, title: nil, titleColor: nil)
     }
-    open func yzt_setRightButton(image:UIImage) {
+    public func yzt_setRightButton(image:UIImage) {
         yzt_setRightButton(normal: image, highlighted: image, title: nil, titleColor: nil)
     }
-    open func yzt_setRightButton(title:String, titleColor:UIColor) {
+    public func yzt_setRightButton(title:String, titleColor:UIColor) {
         yzt_setRightButton(normal: nil, highlighted: nil, title: title, titleColor: titleColor)
     }
     
@@ -225,8 +225,7 @@ extension UIViewController
     //  presentedViewController:    A页面
     //  presentingViewController:   B页面
     
-    open func yzt_toLastViewController(animated:Bool)
-    {
+    public func yzt_toLastViewController(animated:Bool) {
         if self.navigationController != nil
         {
             if self.navigationController?.viewControllers.count == 1
@@ -241,8 +240,7 @@ extension UIViewController
         }
     }
     
-    open class func yzt_currentViewController() -> UIViewController
-    {
+    public static func yzt_currentViewController() -> UIViewController {
         if let rootVC = UIApplication.shared.delegate?.window??.rootViewController {
             return self.yzt_currentViewController(from: rootVC)
         } else {
@@ -250,8 +248,7 @@ extension UIViewController
         }
     }
     
-    open class func yzt_currentViewController(from fromVC:UIViewController) -> UIViewController
-    {
+    public static func yzt_currentViewController(from fromVC:UIViewController) -> UIViewController {
         if fromVC.isKind(of: UINavigationController.self) {
             let navigationController = fromVC as! UINavigationController
             return yzt_currentViewController(from: navigationController.viewControllers.last!)
